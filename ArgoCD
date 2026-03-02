@@ -45,3 +45,21 @@ export ARGO_PWD='kubectl -n argocd get secret argocd-initial-admin-secret -o jso
 echo $ARGO_PWD
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
+
+# 
+#-------------------------------
+
+kubectl create -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.1/deploy/static/provider/cloud/deploy.yaml
+kubectl get ing
+
+yum install git -y
+git clone https://github.com/cloudcomputingintelugu/k8s_ingress.git
+
+cd kubernetes/ingress
+
+kubectl apply -f .
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml
+
+
+
+
