@@ -12,13 +12,17 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 chmod +x kubectl
 mv kubectl /usr/local/bin/
 
-export KOPS_STATE_STORE=s3://ccit.k8s.bucket
 
+# kOps Setup
+# ----------------------------
+
+export KOPS_STATE_STORE=s3://ccit.k8s.bucket
 kops create cluster --zones=ap-south-1a,ap-south-1b --name ccit.k8s.local --master-count=1 --master-size=m7i-flex.large --master-volume-size=30 --node-count=2 --node-size=c7i-flex.large --node-volume-size=20 --image=ami-019715e0d74f695be
 kops update cluster --name ccit.k8s.local --yes --admin
 
 
 # Install ArgoCD
+# ----------------------------
 
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
